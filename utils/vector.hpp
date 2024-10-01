@@ -11,8 +11,8 @@ namespace useful{
 		int capacity, size;
 		ITEM* items;
 		public:
-		ITEM* getArray(){return items;}
 
+		ITEM* getArray(){return items;}
 		ITEM* const getArray()const{return items;}
 
 		int getSize()const{return size;}
@@ -21,17 +21,18 @@ namespace useful{
 			assert(i >= 0 && i < size);
 			return items[i];
 		}
-
 		ITEM const& operator[](int i)const{
 			assert(i >=0 && i < size );
 			return items[i];
 		}
 
-		explicit Vector(): capacity(MIN_CAPACITY),
-		size(0),
-		items(rawMemory<ITEM>(capacity)) {}
+		explicit Vector() :
+            capacity(MIN_CAPACITY),
+            size(0),
+            items(rawMemory<ITEM>(capacity)) {}
 
-		explicit Vector(int initialSize,
+		explicit Vector(
+                int initialSize,
 				ITEM const& value = ITEM()) :
 			size(0),
 			capacity(std::max(initialSize, int(MIN_CAPACITY))),
@@ -79,6 +80,50 @@ namespace useful{
 			std::swap(size, other.size);
 			std::swap(capacity, other.capacity);
 		}
+
+        ITEM const& lastItem()const{return items[size -1 ];}
+        ITEM& lastItem(){return items[size -1 ];}
+        void reverse(int left, int right) { while (left < right) swap(items[left++], items[right--]);}
+        void reverse(){reverse(0, size - 1);}
+        void appendVector(Vector const& rhs){for(int i = 0 ; i < rhs.getSize(); ++i) append(rhs[i]);}
+
+        Vector& operator+=(Vector const& rhs){
+            assert(size == rhs.size);
+            for(int i = 0; i < size; ++i) items[i] += rhs.items[i];
+            return *this;
+        }
+
+        Vector& operator-=(Vector const& rhs){
+            assert(size == rhs.size);
+            for(int i = 0; i < size; ++i) items[i] -= rhs.items[i];
+            return *this;
+        }
+
+        template<typename SCALAR>
+        Vector& operator*=(SCALAR const& scalar){
+            for(int i = 0; i < size; ++i) items[i] *= scalar;
+            return *this;
+        }
+
+        friend Vector operator*(Vector const& a, ITEM const& scalar){
+            Vector result(a);
+            return result *= scalar;
+        }
+        
+        friend ITEM dotProduct(Vector const& a, Vector const& b){
+            assert(a.size == b.size);
+            ITEM result(0);
+            for(int i =0; i< a.size; ++i) result += a[i] * b[i];
+        }
+
+        Vector operator-()const{return *this * -1;}
+        bool operator==(Vector const& rhs)const{
+            if(size == rhs.size){
+                for (int i=0; i<size; ++i) if(items[i] != rhs[i]) return false;
+                return true;
+            }
+            return false;
+        }
 
 	};
 
