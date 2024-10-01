@@ -6,7 +6,8 @@
 
 namespace useful{
 
-	template<typename ITEM> class Vector: public ArithmeticType<Vector<ITEM> >{
+	template<typename ITEM>
+    class Vector: public ArithmeticType<Vector<ITEM> >{
 		enum{MIN_CAPACITY = 8};
 		int capacity, size;
 		ITEM* items;
@@ -16,6 +17,7 @@ namespace useful{
 		ITEM* const getArray()const{return items;}
 
 		int getSize()const{return size;}
+		int getCapacity()const{return capacity;}
 
 		ITEM& operator[](int i){
 			assert(i >= 0 && i < size);
