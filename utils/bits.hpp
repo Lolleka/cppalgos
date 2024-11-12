@@ -6,7 +6,7 @@
 #include "vector.hpp"
 #include "utils.hpp"
 
-namespace useful{
+namespace dmk{
     unsigned long long twoPower(int x);
     bool isPowerOfTwo(unsigned long long x);
 

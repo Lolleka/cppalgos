@@ -3,7 +3,7 @@
 
 #include "vector.hpp"
 
-namespace useful {
+namespace dmk{
 
     class UnionFind{
         // Implements union-by-size with compression

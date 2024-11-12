@@ -3,7 +3,7 @@
 
 TEST_CASE( "vectors can be sized and resized", "[vector]" ) {
     // This setup will be done 4 times in total, once for each section
-    useful::Vector<int> v(5, 0);
+    dmk::Vector<int> v(5, 0);
 
     REQUIRE( v.getSize() == 5 );
     REQUIRE( v.getCapacity() >= 5 );

@@ -3,7 +3,7 @@
 
 #include "vector.hpp"
 
-namespace useful{
+namespace dmk{
 
 	template<typename ITEM, typename VECTOR = Vector<ITEM> >
     struct Stack{

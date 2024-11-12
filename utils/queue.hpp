@@ -5,7 +5,7 @@
 #include "utils.hpp"
 #include "vector.hpp"
 
-namespace useful{
+namespace dmk{
 
 	template<typename ITEM>
     class Queue{

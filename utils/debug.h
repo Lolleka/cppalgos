@@ -2,7 +2,7 @@
 #define DEBUG_H
 #include <iostream>
 
-namespace igmdk{
+namespace dmk{
 
 #define DEBUG(var) std::cout << #var " " << (var) << std::endl;
 

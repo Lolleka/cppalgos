@@ -4,7 +4,7 @@
 #include <algorithm>
 #include "utils.hpp"
 
-namespace useful{
+namespace dmk{
 
 	template<typename ITEM>
     class Vector: public ArithmeticType<Vector<ITEM> >{

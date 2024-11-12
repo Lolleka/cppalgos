@@ -3,7 +3,7 @@
 #include "utils/debug.h"
 #include <iostream>
 
-using namespace useful;
+using namespace dmk;
 
 int main(){
     /* int* a = rawMemory<int>(8); */

@@ -1,3 +1,5 @@
+// Credits: Dmytro Kedyk
+
 #ifndef UTILS_H
 #define UTILS_H
 
@@ -5,9 +7,10 @@
 #include <cassert>
 #include <algorithm>
 
-namespace useful{
-
-    long long ceiling(unsigned long long n, long long divisor);
+namespace dmk{
+    inline long long ceiling(unsigned long long n, long long divisor){
+        return n/divisor + bool(n % divisor);
+    }
 
     template<typename ITEM> ITEM* rawMemory(int n){
         return (ITEM*)::operator new(sizeof(ITEM) * n);

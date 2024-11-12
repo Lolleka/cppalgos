@@ -3,7 +3,7 @@
 
 #include "utils.hpp"
 
-namespace useful{
+namespace dmk{
 	template<typename ITEM>
     class SimpleDoublyLinkedList{
         struct Node {

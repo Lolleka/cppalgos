@@ -5,7 +5,7 @@
 #include "linkedlist.hpp"
 #include "vector.hpp"
 
-namespace useful{
+namespace dmk{
 	template<typename ITEM>
     struct StaticFreelist{
         int capacity, size, maxSize; // size <= maxSize <= capacity

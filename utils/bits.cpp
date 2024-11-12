@@ -1,6 +1,6 @@
 #include "bits.hpp"
 
-namespace useful{
+namespace dmk{
     unsigned long long twoPower(int x){return 1ull << x;}
     bool isPowerOfTwo(unsigned long long x){return !(x & (x - 1));}
 
