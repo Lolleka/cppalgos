@@ -7,7 +7,13 @@
 #include <algorithm>
 
 namespace dmk{
-    uint32_t xorshiftTransform(uint32_t x);
+    uint32_t xorshiftTransform(uint32_t x){
+        x ^= x << 13;
+        x ^= x >> 17;
+        x ^= x << 5;
+        return x;
+    }
+
 
     class QualityXorshift64{
         uint64_t state;
@@ -151,6 +157,7 @@ namespace dmk{
         double uniform01(){return g.uniform01();}
     };
 
+    // Random number generator with default GENERATOR type
     Random<>& GlobalRNG(){
         static Random<> r;
         return r;
