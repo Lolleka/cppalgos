@@ -99,6 +99,51 @@ bool isSorted(ITEM const* vector, int left, int right, COMPARATOR const& c){
     return true;
 }
 
+template<typename ITEM, typename COMPARATOR>
+void merge(ITEM* vector, int left, int middle, int right, COMPARATOR const& c, ITEM* storage){
+    // i for the left half, j for the right half, merge unitll the vector is filled up
+    for (int i = left, j = middle + 1; left <= right; ++left) {
+        // either i or j can get out of bounds
+        bool useRight = i > middle || ( j <= right && c(storage[j], storage[i]));
+        vector[left] = storage[(useRight ? j : i)++];
+    }
 }
 
-#endif // !SORTING_H
+template<typename ITEM, typename COMPARATOR>
+void mergeSortHelper(ITEM* vector, int left, int right, COMPARATOR const& c, ITEM* storage){
+    if(right - left > 16)
+    {
+        // sort storage using vector as storage, then merge into vector
+        int middle = (right + left) / 2;
+        mergeSortHelper(storage, left, middle, c, vector);
+        mergeSortHelper(storage, middle + 1, right, c, vector);
+        merge(vector, left, middle, right, c, storage);
+    }
+    else insertionSort(vector, left, right, c);
+}
+
+template<typename ITEM, typename COMPARATOR>
+void mergeSort(ITEM* vector, int n, COMPARATOR const& c){
+    if(n <= 1) return;
+    Vector<ITEM> storage(n, vector[0]); // reserve space for n with 1st item
+    for (int i = 0; i < n; ++i) storage[i] = vector[i];
+    mergeSortHelper(vector, 0, n-1, c, storage.getArray());
+}
+
+void countingSort(int* vector, int n, int N);
+
+template<typename ITEM, typename ORDERED_HASH>
+void KSort(ITEM* a, int n, int N, ORDERED_HASH const& h){
+    ITEM* temp = rawMemory<ITEM>(n);
+    Vector<int> prec(N + 1, 0);
+    for (int i = 0; i < n; ++i) ++prec[h(a[i]) + 1];
+    for (int i = 0; i < N; ++i) prec[i + 1] += prec[i]; // accumulate counts
+    // rearrange items
+    for (int i = 0; i < n; ++i) new(&temp[prec[h(a[i])]++]) ITEM(a[i]);
+    for (int i = 0; i < n; ++i) a[i] = temp[i];
+    rawDelete(temp);
+}
+
+}
+
+#endif // SORTING_H

@@ -16,14 +16,11 @@ namespace dmk{
         return (ITEM*)::operator new(sizeof(ITEM) * n);
     }
 
-    void rawDelete(void* array){
-        ::operator delete(array);
-    }
+    void rawDelete(void* array);
 
     template<typename ITEM> void rawDestruct(ITEM* array, int size){
         for(int i=0; i < size; i++) array[i].~ITEM();
         rawDelete(array);
-
     }
 
     template<typename TYPE> TYPE& genericAssign(TYPE& to, TYPE const& rhs){
