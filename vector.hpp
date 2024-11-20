@@ -47,6 +47,16 @@ public:
         for(int i = 0; i < initialSize; ++i) append(value);
     }
 
+    explicit Vector(std::initializer_list<ITEM> list) :
+        size(0),
+        capacity(MIN_CAPACITY),
+        items(rawMemory<ITEM>(capacity))
+    {
+        for (auto p = list.begin(); p != list.end(); p++){
+            append(*p);
+        }
+    }
+
     Vector(Vector const& rhs): 
         size(rhs.size),
         capacity(std::max(rhs.size, int(MIN_CAPACITY))),
